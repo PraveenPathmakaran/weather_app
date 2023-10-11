@@ -17,7 +17,7 @@ class CurrentPlaceBloc extends Bloc<CurrentPlaceEvent, CurrentPlaceState> {
       final currentPlace = await currentPlaceRepository.getCurrentPlace();
 
       await currentPlace.fold(
-          (failure) async => CurrentPlaceErrorState(failure: failure),
+          (failure) async => emit(CurrentPlaceErrorState(failure: failure)),
           (currentPlace) async => emit(CurrentPlaceLoadedState(
                 currentPlaceModel: currentPlace as CurrentPlaceModel,
               )));

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:weather_app/core/errors/exceptions.dart';
 import 'package:weather_app/core/errors/failures.dart';
 import 'package:weather_app/features/weather_data/data/model/current_place_model.dart';
 import 'package:weather_app/features/weather_data/domain/repository/current_place_repository.dart';
@@ -14,9 +15,9 @@ class CurrentPlaceRepositoryImpl implements CurrentPlaceRepository {
     try {
       final currentPlace = await currentPlaceDataSource.getCurrentPlace();
       return right(currentPlace);
-    } on LocationPermissionDeniedFailure {
+    } on LocationPermissionDeniedException {
       return left(LocationPermissionDeniedFailure());
-    } on LocationPermissionDeniedForEverFailure {
+    } on LocationPermissionDeniedForEverException {
       return left(LocationPermissionDeniedForEverFailure());
     } catch (e) {
       return left(UnknownFailure());

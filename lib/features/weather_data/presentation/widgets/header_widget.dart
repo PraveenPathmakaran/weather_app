@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:weather_app/core/errors/failures.dart';
+import 'package:weather_app/core/utils/show_toast.dart';
 import 'package:weather_app/features/weather_data/data/datasources/current_place_datasource.dart';
 import 'package:weather_app/features/weather_data/data/repository/current_place_repository_impl.dart';
 import 'package:weather_app/features/weather_data/presentation/bloc/current_place_bloc/current_place_bloc.dart';
@@ -12,9 +14,20 @@ class HeaderWidget extends StatelessWidget {
     return BlocProvider<CurrentPlaceBloc>(
       create: (context) => CurrentPlaceBloc(
           currentPlaceRepository: CurrentPlaceRepositoryImpl(
-              currentPlaceDataSource: CurrentPlaceDataSourceImpl()))
+        currentPlaceDataSource: CurrentPlaceDataSourceImpl(),
+      ))
         ..add(FetchCurrentPlaceEvent()),
-      child: BlocBuilder<CurrentPlaceBloc, CurrentPlaceState>(
+      child: BlocConsumer<CurrentPlaceBloc, CurrentPlaceState>(
+        listener: (context, state) {
+          if (state is CurrentPlaceErrorState) {
+            if (state.failure is LocationPermissionDeniedFailure) {
+              return toast(msg: "Please Turn on Location");
+            }
+            if (state is PermissionSuccessState) {
+              context.read<CurrentPlaceBloc>().add(FetchCurrentPlaceEvent());
+            }
+          }
+        },
         builder: (context, state) {
           if (state is CurrentPlaceLoadingState) {
             return const LoadingWidget();
@@ -40,6 +53,10 @@ class HeaderWidget extends StatelessWidget {
                   ),
                 ),
               ],
+            );
+          } else if (state is CurrentPlaceErrorState) {
+            return const Center(
+              child: Text("Something went wrong"),
             );
           } else {
             return const SizedBox();

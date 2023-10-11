@@ -6,4 +6,5 @@ sealed class CurrentPlaceEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
-class FetchCurrentPlaceEvent extends CurrentPlaceEvent{}
+
+class FetchCurrentPlaceEvent extends CurrentPlaceEvent {}

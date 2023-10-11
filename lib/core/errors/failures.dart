@@ -10,4 +10,3 @@ class LocationPermissionDeniedFailure extends Failure {}
 class UnknownFailure extends Failure {}
 
 class LocationPermissionDeniedForEverFailure extends Failure {}
-class GpsServiceNotEnabledFailure extends Failure {}
