@@ -1,10 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:weather_app/features/weather_data/data/model/current_place_model.dart';
-import 'package:weather_app/features/weather_data/domain/repository/current_place_repository.dart';
-
 import '../../../../../core/errors/failures.dart';
-
+import '../../../data/model/current_place_model.dart';
+import '../../../domain/repository/current_place_repository.dart';
 part 'current_place_event.dart';
 part 'current_place_state.dart';
 

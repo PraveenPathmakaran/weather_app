@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:weather_app/core/errors/exceptions.dart';
 import 'package:weather_app/core/errors/failures.dart';
-import 'package:weather_app/features/weather_data/data/model/current_place_model.dart';
-import 'package:weather_app/features/weather_data/domain/repository/current_place_repository.dart';
-
+import '../../domain/repository/current_place_repository.dart';
 import '../datasources/current_place_datasource.dart';
+import '../model/current_place_model.dart';
 
 class CurrentPlaceRepositoryImpl implements CurrentPlaceRepository {
   final CurrentPlaceDataSource currentPlaceDataSource;

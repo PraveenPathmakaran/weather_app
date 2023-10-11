@@ -10,7 +10,6 @@ sealed class CurrentPlaceState extends Equatable {
 final class CurrentPlaceInitial extends CurrentPlaceState {}
 
 final class CurrentPlaceLoadingState extends CurrentPlaceState {}
-final class PermissionSuccessState extends CurrentPlaceState {}
 
 final class CurrentPlaceErrorState extends CurrentPlaceState {
   final Failure failure;
