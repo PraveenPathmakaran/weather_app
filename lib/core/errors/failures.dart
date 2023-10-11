@@ -5,3 +5,9 @@ abstract class Failure extends Equatable {
   @override
   List<Object?> get props => [];
 }
+
+class LocationPermissionDeniedFailure extends Failure {}
+class UnknownFailure extends Failure {}
+
+class LocationPermissionDeniedForEverFailure extends Failure {}
+class GpsServiceNotEnabledFailure extends Failure {}
