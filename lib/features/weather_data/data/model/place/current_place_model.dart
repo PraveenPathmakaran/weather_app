@@ -1,4 +1,4 @@
-import '../../domain/entity/current_place_entity.dart';
+import '../../../domain/entity/place/current_place_entity.dart';
 
 class CurrentPlaceModel extends CurrentPlaceEntity {
   const CurrentPlaceModel({

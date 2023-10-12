@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:weather_app/core/errors/failures.dart';
 import 'package:weather_app/core/errors/usecase/usecase.dart';
-import '../entity/current_place_entity.dart';
+import '../entity/place/current_place_entity.dart';
 import '../repository/current_place_repository.dart';
 
 class GetCurrentPlace implements UseCase<CurrentPlaceEntity, NoParams> {

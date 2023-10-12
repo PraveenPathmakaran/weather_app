@@ -1,6 +1,6 @@
 import 'package:geocoding/geocoding.dart';
 import 'package:intl/intl.dart';
-import '../model/current_place_model.dart';
+import '../model/place/current_place_model.dart';
 import 'current_location_datasource.dart';
 
 abstract class CurrentPlaceDataSource {

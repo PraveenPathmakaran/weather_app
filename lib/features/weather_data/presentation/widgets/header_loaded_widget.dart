@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../data/model/current_place_model.dart';
+import '../../data/model/place/current_place_model.dart';
 
 class HeaderLoadedWidget extends StatelessWidget {
   final CurrentPlaceModel placeModel;
