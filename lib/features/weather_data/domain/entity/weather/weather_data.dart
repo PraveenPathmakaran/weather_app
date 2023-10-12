@@ -5,8 +5,8 @@ import 'weather_data_daily.dart';
 import 'weather_data_hourly.dart';
 
 class WeatherDataEntity extends Equatable {
-  final HourlyEntity hourly;
-  final DailyEntity daily;
+  final List<HourlyEntity> hourly;
+  final List<DailyEntity> daily;
   final CurrentEntity current;
 
   const WeatherDataEntity({

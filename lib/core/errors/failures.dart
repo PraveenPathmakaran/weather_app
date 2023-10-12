@@ -7,6 +7,9 @@ abstract class Failure extends Equatable {
 }
 
 class LocationPermissionDeniedFailure extends Failure {}
+
 class UnknownFailure extends Failure {}
 
 class LocationPermissionDeniedForEverFailure extends Failure {}
+
+class ServerFailure extends Failure {}
