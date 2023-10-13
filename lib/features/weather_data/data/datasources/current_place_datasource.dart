@@ -23,7 +23,12 @@ class CurrentPlaceDataSourceImpl implements CurrentPlaceDataSource {
         await placemarkFromCoordinates(latitude, longitude);
     String placeName = placeMark[0].locality ?? '';
 
-    return CurrentPlaceModel(place: placeName, date: date);
+    return CurrentPlaceModel(
+      place: placeName,
+      date: date,
+      lat: latitude.toString(),
+      lon: longitude.toString(),
+    );
   }
 
   @override

@@ -1,8 +1,10 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../../core/errors/failures.dart';
 import '../../../data/model/place/current_place_model.dart';
 import '../../../domain/repository/current_place_repository.dart';
+
 part 'current_place_event.dart';
 part 'current_place_state.dart';
 
@@ -16,9 +18,11 @@ class CurrentPlaceBloc extends Bloc<CurrentPlaceEvent, CurrentPlaceState> {
 
       await currentPlace.fold(
           (failure) async => emit(CurrentPlaceErrorState(failure: failure)),
-          (currentPlace) async => emit(CurrentPlaceLoadedState(
-                currentPlaceModel: currentPlace as CurrentPlaceModel,
-              )));
+          (currentPlace) async {
+        return emit(CurrentPlaceLoadedState(
+          currentPlaceModel: currentPlace as CurrentPlaceModel,
+        ));
+      });
     });
   }
 }

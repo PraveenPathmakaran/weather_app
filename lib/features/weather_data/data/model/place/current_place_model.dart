@@ -4,5 +4,7 @@ class CurrentPlaceModel extends CurrentPlaceEntity {
   const CurrentPlaceModel({
     required super.place,
     required super.date,
+    required super.lat,
+    required super.lon,
   });
 }
