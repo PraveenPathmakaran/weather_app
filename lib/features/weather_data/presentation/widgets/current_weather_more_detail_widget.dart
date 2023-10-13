@@ -1,55 +1,52 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/color_manager/color_manager.dart';
 import 'package:weather_app/core/image_manager/image_manager.dart';
 import 'package:weather_app/core/size_manager/size_manager.dart';
 
-import '../bloc/current_weather_bloc/current_weather_bloc.dart';
+import '../../domain/entity/weather/weather_data_current.dart';
 
 class CurrentWeatherMoreDetailWidget extends StatelessWidget {
-  const CurrentWeatherMoreDetailWidget({super.key});
+  const CurrentWeatherMoreDetailWidget({
+    super.key,
+    required this.current,
+  });
+
+  final CurrentEntity current;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CurrentWeatherBloc, CurrentWeatherState>(
-      builder: (context, state) {
-        if (state is CurrentWeatherLoaded) {
-          return Column(
-            children: <Widget>[
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  MoreDetailImageWidget(
-                    imagePath: ImageManager.windspeed,
-                  ),
-                  MoreDetailImageWidget(
-                    imagePath: ImageManager.clouds,
-                  ),
-                  MoreDetailImageWidget(
-                    imagePath: ImageManager.humidity,
-                  ),
-                ],
-              ),
-              SizeManager.kHeight10,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  MoreDetailTextWidget(
-                    text: "${state.weather.current.windSpeed}km/h",
-                  ),
-                  MoreDetailTextWidget(
-                    text: "${state.weather.current.clouds}%",
-                  ),
-                  MoreDetailTextWidget(
-                    text: "${state.weather.current.humidity}%",
-                  ),
-                ],
-              )
-            ],
-          );
-        }
-        return SizeManager.kSize;
-      },
+    return Column(
+      children: <Widget>[
+        const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            MoreDetailImageWidget(
+              imagePath: ImageManager.windspeed,
+            ),
+            MoreDetailImageWidget(
+              imagePath: ImageManager.clouds,
+            ),
+            MoreDetailImageWidget(
+              imagePath: ImageManager.humidity,
+            ),
+          ],
+        ),
+        SizeManager.kHeight10,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            MoreDetailTextWidget(
+              text: "${current.windSpeed}km/h",
+            ),
+            MoreDetailTextWidget(
+              text: "${current.clouds}%",
+            ),
+            MoreDetailTextWidget(
+              text: "${current.humidity}%",
+            ),
+          ],
+        )
+      ],
     );
   }
 }
