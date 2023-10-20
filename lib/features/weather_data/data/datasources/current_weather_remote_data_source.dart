@@ -1,8 +1,8 @@
 import 'dart:convert';
 
+import 'package:http/http.dart';
 import 'package:weather_app/core/errors/exceptions.dart';
 import 'package:weather_app/features/weather_data/data/model/weather/weather_data.dart';
-import 'package:http/http.dart';
 
 import '../../../../core/api/api_key.dart';
 

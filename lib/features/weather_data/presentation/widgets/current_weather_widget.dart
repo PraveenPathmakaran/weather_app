@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/core/color_manager/color_manager.dart';
 import 'package:weather_app/core/size_manager/size_manager.dart';
+import 'package:weather_app/features/weather_data/presentation/widgets/comfort_level.dart';
 import 'package:weather_app/features/weather_data/presentation/widgets/current_weather_more_detail_widget.dart';
 import 'package:weather_app/features/weather_data/presentation/widgets/daily_data_forecast_widget.dart';
 import 'package:weather_app/features/weather_data/presentation/widgets/temparature_area_widget.dart';
@@ -25,7 +27,17 @@ class CurrentWeatherWidget extends StatelessWidget {
               //more details - windspeed,humidity,clouds
               CurrentWeatherMoreDetailWidget(current: state.weather.current),
               HourlyDataWidget(hourly: state.weather.hourly),
-              DailyDataForeCast(dailyDataForeCast: state.weather.daily,)
+              DailyDataForeCast(
+                dailyDataForeCast: state.weather.daily,
+              ),
+              Container(
+                height: 1,
+                color: ColorManger.dividerLine,
+              ),
+              SizeManager.kHeight10,
+              ComfortLevelWidget(
+                weather: state.weather.current,
+              )
             ],
           );
         } else {
