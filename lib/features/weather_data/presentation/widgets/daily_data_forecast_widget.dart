@@ -32,45 +32,33 @@ class DailyDataForeCast extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
-            height: 300,
+          Expanded(
             child: ListView.builder(
+              padding: const EdgeInsets.all(10),
               scrollDirection: Axis.vertical,
               itemCount: dailyDataForeCast.length,
               itemBuilder: (context, index) {
-                return Column(
-                  children: <Widget>[
-                    Container(
-                      height: 60,
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                              width: 80,
-                              child: Text(
-                                AppUtils.getDay(dailyDataForeCast[index].dt),
-                                style: const TextStyle(
-                                  color: ColorManger.textColorBlack,
-                                  fontSize: 13,
-                                ),
-                              )),
-                          SizedBox(
-                            height: 30,
-                            width: 30,
-                            child: Image.asset(
-                                "assets/weather/${dailyDataForeCast[index].weather[0].icon}.png"),
-                          ),
-                          Text(
-                              "${dailyDataForeCast[index].tempEntity.max}/${dailyDataForeCast[index].tempEntity.min}"), //todo add degree symbol
-                          Container(
-                            height: 1,
-                            color: ColorManger.dividerLine,
-                          )
-                        ],
+                return SizedBox(
+                  height: 60,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppUtils.getDay(dailyDataForeCast[index].dt),
+                        style: const TextStyle(
+                          color: ColorManger.textColorBlack,
+                          fontSize: 13,
+                        ),
                       ),
-                    )
-                  ],
+                      Image.asset(
+                        "assets/weather/${dailyDataForeCast[index].weather[0].icon}.png",
+                        height: 30,
+                      ),
+                      Text(
+                          "${dailyDataForeCast[index].tempEntity.max}/${dailyDataForeCast[index].tempEntity.min}"),
+                      //todo add degree symbol
+                    ],
+                  ),
                 );
               },
             ),
