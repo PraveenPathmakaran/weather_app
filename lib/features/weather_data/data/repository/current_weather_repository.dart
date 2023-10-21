@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:weather_app/core/errors/exceptions.dart';
 import 'package:weather_app/core/errors/failures.dart';
@@ -23,7 +21,6 @@ class CurrentWeatherRepositoryImpl extends CurrentWeatherRepository {
     try {
       final WeatherDataModel weather =
           await repo.getWeather(lat: lat, lon: lon);
-
 
       return right(weather.toDomain());
     } on ServerException {

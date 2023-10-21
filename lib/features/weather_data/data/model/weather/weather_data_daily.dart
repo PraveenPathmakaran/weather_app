@@ -17,9 +17,9 @@ class DailyModel extends Equatable {
 
   factory DailyModel.fromJson(Map<String, dynamic> json) => DailyModel(
         dt: json['dt'] as int?,
-        tempModel: json['tempModel'] == null
+        tempModel: json['temp'] == null
             ? null
-            : TempModel.fromJson(json['tempModel'] as Map<String, dynamic>),
+            : TempModel.fromJson(json['temp'] as Map<String, dynamic>),
         weather: (json['weather'] as List<dynamic>?)
             ?.map((e) => WeatherModel.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -27,7 +27,7 @@ class DailyModel extends Equatable {
 
   Map<String, dynamic> toJson() => {
         'dt': dt,
-        'tempModel': tempModel?.toJson(),
+        'temp': tempModel?.toJson(),
         'weather': weather?.map((e) => e.toJson()).toList(),
       };
 

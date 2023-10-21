@@ -27,7 +27,8 @@ class CurrentWeatherRemoteDataSourceImpl
       final Response response = await client.get(Uri.parse(apiUrl(lat, lon)));
       final Map<String, dynamic> jsonString = jsonDecode(response.body);
 
-      final weahterData = WeatherDataModel.fromJson(jsonString);
+      final WeatherDataModel weahterData =
+          WeatherDataModel.fromJson(jsonString);
       return weahterData;
     } catch (e) {
       throw ServerException();
