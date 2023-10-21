@@ -4,7 +4,7 @@ import 'package:weather_app/core/utils/utils.dart';
 
 import '../../domain/entity/weather/weather_data_hourly.dart';
 
-class HourlyDataWidget extends StatelessWidget {
+class HourlyDataWidget extends StatefulWidget {
   const HourlyDataWidget({
     super.key,
     required this.hourly,
@@ -12,6 +12,12 @@ class HourlyDataWidget extends StatelessWidget {
 
   final List<HourlyEntity> hourly;
 
+  @override
+  State<HourlyDataWidget> createState() => _HourlyDataWidgetState();
+}
+
+class _HourlyDataWidgetState extends State<HourlyDataWidget> {
+  int cardIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,33 +35,39 @@ class HourlyDataWidget extends StatelessWidget {
           padding: const EdgeInsets.only(top: 10, bottom: 10),
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: hourly.length,
+            itemCount: widget.hourly.length,
             itemBuilder: (context, index) => GestureDetector(
+                onTap: () {
+                  cardIndex = index;
+                  setState(() {});
+                },
                 child: Container(
-              width: 90,
-              margin: const EdgeInsets.only(left: 20, right: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                boxShadow: [
-                  BoxShadow(
-                      offset: const Offset(0.5, 0),
-                      blurRadius: 30,
-                      spreadRadius: 1,
-                      color: ColorManger.dividerLine.withAlpha(150))
-                ],
-                gradient: const LinearGradient(
-                  colors: [
-                    ColorManger.firstGradientColor,
-                    ColorManger.secondGradientColor,
-                  ],
-                ),
-              ),
-              child: HourlyDetails(
-                timeStamp: hourly[index].dt,
-                temp: hourly[index].temp,
-                weatherIcon: hourly[index].weather[0].icon,
-              ),
-            )),
+                  width: 90,
+                  margin: const EdgeInsets.only(left: 20, right: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                          offset: const Offset(0.5, 0),
+                          blurRadius: 30,
+                          spreadRadius: 1,
+                          color: ColorManger.dividerLine.withAlpha(150))
+                    ],
+                    gradient: cardIndex == index
+                        ? const LinearGradient(
+                            colors: [
+                              ColorManger.firstGradientColor,
+                              ColorManger.secondGradientColor,
+                            ],
+                          )
+                        : null,
+                  ),
+                  child: HourlyDetails(
+                    timeStamp: widget.hourly[index].dt,
+                    temp: widget.hourly[index].temp,
+                    weatherIcon: widget.hourly[index].weather[0].icon,
+                  ),
+                )),
           ),
         ),
       ],
