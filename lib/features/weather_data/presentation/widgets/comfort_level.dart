@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:weather_app/core/color_manager/color_manager.dart';
+import 'package:weather_app/features/weather_data/presentation/bloc/theme_bloc/theme_bloc.dart';
 
 import '../../domain/entity/weather/weather_data_current.dart';
 
@@ -14,6 +16,7 @@ class ComfortLevelWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<ThemeBloc>(context, listen: true);
     return Column(
       children: <Widget>[
         Container(
@@ -38,6 +41,12 @@ class ComfortLevelWidget extends StatelessWidget {
                         handlerSize: 0, trackWidth: 12, progressBarWidth: 12),
                     infoProperties: InfoProperties(
                         bottomLabelText: "Humidity",
+                        mainLabelStyle: TextStyle(
+                          color: bloc.state.isDark
+                              ? ColorManger.dividerLine
+                              : ColorManger.textColorBlack,
+                          fontSize: 25,
+                        ),
                         bottomLabelStyle: const TextStyle(
                           letterSpacing: 0.1,
                           fontSize: 14,
@@ -46,13 +55,13 @@ class ComfortLevelWidget extends StatelessWidget {
                     animationEnabled: true,
                     size: 140,
                     customColors: CustomSliderColors(
-                        progressBarColors: [
-                          ColorManger.firstGradientColor,
-                          ColorManger.secondGradientColor
-                        ],
-                        trackColor:
-                            ColorManger.firstGradientColor.withAlpha(100),
-                        hideShadow: true),
+                      progressBarColors: [
+                        ColorManger.firstGradientColor,
+                        ColorManger.secondGradientColor
+                      ],
+                      trackColor: ColorManger.firstGradientColor.withAlpha(100),
+                      hideShadow: true,
+                    ),
                   ),
                 ),
               ),
@@ -61,19 +70,23 @@ class ComfortLevelWidget extends StatelessWidget {
                 children: <Widget>[
                   RichText(
                       text: TextSpan(children: [
-                    const TextSpan(
+                    TextSpan(
                         text: "Feels Like",
                         style: TextStyle(
                             fontSize: 14,
                             height: 0.8,
-                            color: ColorManger.textColorBlack,
+                            color: bloc.state.isDark
+                                ? ColorManger.dividerLine
+                                : ColorManger.textColorBlack,
                             fontWeight: FontWeight.w400)),
                     TextSpan(
                         text: "${weather.feelsLike}",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14,
                             height: 0.8,
-                            color: ColorManger.textColorBlack,
+                            color: bloc.state.isDark
+                                ? ColorManger.dividerLine
+                                : ColorManger.textColorBlack,
                             fontWeight: FontWeight.w400)),
                   ])),
                   Container(
@@ -87,19 +100,23 @@ class ComfortLevelWidget extends StatelessWidget {
                   ),
                   RichText(
                       text: TextSpan(children: [
-                    const TextSpan(
+                    TextSpan(
                         text: "UV Index",
                         style: TextStyle(
                             fontSize: 14,
                             height: 0.8,
-                            color: ColorManger.textColorBlack,
+                            color: bloc.state.isDark
+                                ? ColorManger.dividerLine
+                                : ColorManger.textColorBlack,
                             fontWeight: FontWeight.w400)),
                     TextSpan(
                         text: "${weather.uvIndex}",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14,
                             height: 0.8,
-                            color: ColorManger.textColorBlack,
+                            color: bloc.state.isDark
+                                ? ColorManger.dividerLine
+                                : ColorManger.textColorBlack,
                             fontWeight: FontWeight.w400)),
                   ])),
                 ],

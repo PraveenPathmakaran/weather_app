@@ -13,10 +13,10 @@ final class CurrentWeatherLoading extends CurrentWeatherState {}
 
 final class CurrentWeatherLoaded extends CurrentWeatherState {
   final WeatherDataEntity weather;
+  final CurrentPlaceModel currentPlaceModel;
 
-  const CurrentWeatherLoaded({
-    required this.weather,
-  });
+  const CurrentWeatherLoaded(
+      {required this.weather, required this.currentPlaceModel});
 }
 
 final class CurrentWeatherError extends CurrentWeatherState {

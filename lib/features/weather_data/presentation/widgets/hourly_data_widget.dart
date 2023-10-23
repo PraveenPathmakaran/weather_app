@@ -48,10 +48,8 @@ class _HourlyDataWidgetState extends State<HourlyDataWidget> {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                          offset: const Offset(0.5, 0),
-                          blurRadius: 30,
-                          spreadRadius: 1,
-                          color: ColorManger.dividerLine.withAlpha(150))
+                        color: ColorManger.dividerLine.withAlpha(10),
+                      )
                     ],
                     gradient: cardIndex == index
                         ? const LinearGradient(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_app/core/color_manager/color_manager.dart';
+import 'package:weather_app/features/weather_data/presentation/bloc/theme_bloc/theme_bloc.dart';
 
 import '../../domain/entity/weather/weather_data_current.dart';
 
@@ -11,6 +13,7 @@ class TemperatureAreaWidget extends StatelessWidget {
   final CurrentEntity current;
   @override
   Widget build(BuildContext context) {
+    final bloc = BlocProvider.of<ThemeBloc>(context, listen: true);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
@@ -28,10 +31,10 @@ class TemperatureAreaWidget extends StatelessWidget {
             text: TextSpan(children: [
           TextSpan(
               text: "${current.temp.toInt()}°",
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 68,
-                color: ColorManger.textColorBlack,
+                color: bloc.state.isDark ? Colors.white : Colors.black,
               )),
           TextSpan(
               text: current.weather[0].description,

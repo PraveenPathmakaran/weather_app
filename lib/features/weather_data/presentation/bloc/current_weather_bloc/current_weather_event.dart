@@ -7,10 +7,4 @@ sealed class CurrentWeatherEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchCurrentWeather extends CurrentWeatherEvent {
-  final WeatherParams params;
-
-  const FetchCurrentWeather({
-    required this.params,
-  });
-}
+class FetchCurrentWeather extends CurrentWeatherEvent {}

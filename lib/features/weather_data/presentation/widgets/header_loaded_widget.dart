@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../data/model/place/current_place_model.dart';
 
 class HeaderLoadedWidget extends StatelessWidget {
@@ -11,6 +12,7 @@ class HeaderLoadedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
           margin: const EdgeInsets.only(left: 20, right: 20),
