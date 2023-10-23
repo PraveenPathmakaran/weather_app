@@ -1,7 +1,9 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/features/weather_data/data/datasources/current_weather_remote_data_source.dart';
+import 'package:weather_app/features/weather_data/data/datasources/weather_local_datasource.dart';
 import 'package:weather_app/features/weather_data/data/repository/current_weather_repository.dart';
 import 'package:weather_app/features/weather_data/domain/repository/current_weather_repository.dart';
 import 'package:weather_app/features/weather_data/presentation/bloc/current_weather_bloc/current_weather_bloc.dart';
@@ -29,7 +31,9 @@ Future<void> init() async {
 
   sl.registerLazySingleton<CurrentPlaceRepository>(() =>
       CurrentPlaceRepositoryImpl(
-          currentPlaceDataSource: sl(), networkInfo: sl()));
+          currentPlaceDataSource: sl(),
+          networkInfo: sl(),
+          weatherLocalDataSource: sl()));
 
   //Data Sources
 
@@ -48,17 +52,22 @@ Future<void> init() async {
       () => GetCurrentWeather(repository: sl()));
   //repository
 
-  sl.registerLazySingleton<CurrentWeatherRepository>(
-      () => CurrentWeatherRepositoryImpl(repo: sl()));
+  sl.registerLazySingleton<CurrentWeatherRepository>(() =>
+      CurrentWeatherRepositoryImpl(
+          repo: sl(), localDataSource: sl(), networkInfo: sl()));
   //data source
 
   sl.registerLazySingleton<CurrentWeatherRemoteDataSource>(
       () => CurrentWeatherRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<WeatherLocalDataSource>(
+      () => WeatherLocalDataSourceImpl(sharedPreferences: sl()));
   //core
   sl.registerLazySingleton<NetworkInfo>(
       () => NetworkInfoImpl(connectivity: sl()));
 
   //external
+  final sharedPreferences = await SharedPreferences.getInstance();
+  sl.registerLazySingleton(() => sharedPreferences);
   sl.registerLazySingleton<Client>(() => Client());
   sl.registerLazySingleton(() => Connectivity());
 }

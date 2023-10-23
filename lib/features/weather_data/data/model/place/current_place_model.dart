@@ -7,4 +7,21 @@ class CurrentPlaceModel extends CurrentPlaceEntity {
     required super.lat,
     required super.lon,
   });
+
+  factory CurrentPlaceModel.fromJson(Map<String, dynamic> json) {
+    return CurrentPlaceModel(
+        place: json["place"],
+        date: json["date"],
+        lat: json["lat"],
+        lon: json["lon"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "place": place,
+      "date": date,
+      "lat": lat,
+      "lon": lon,
+    };
+  }
 }

@@ -29,10 +29,20 @@ class WeatherDataModel extends Equatable {
     );
   }
 
+  Map<String, dynamic> toJson() {
+    return {
+      "hourly": hourly?.map((e) => e.toJson()).toList(),
+      "daily": daily?.map((e) => e.toJson()).toList(),
+      "current": current?.toJson()
+    };
+  }
+
   WeatherDataEntity toDomain() {
     return WeatherDataEntity(
       current: current?.toDomain() ?? CurrentEntity.emptyCurrentEntity(),
-      daily: daily!.map((e) => e.toDomain()).toList(),//todo need to change null safety operator
+      daily: daily!
+          .map((e) => e.toDomain())
+          .toList(), //todo need to change null safety operator
       hourly: hourly!.map((e) => e.toDomain()).toList(),
     );
   }

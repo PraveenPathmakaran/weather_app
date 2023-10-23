@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -63,6 +65,7 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
             return const LoadingWidget();
           }
           if (state is CurrentWeatherError) {
+            log(state.failure.toString());
             if (state.failure is LocationPermissionDeniedFailure) {
               return Center(
                 child: GestureDetector(
