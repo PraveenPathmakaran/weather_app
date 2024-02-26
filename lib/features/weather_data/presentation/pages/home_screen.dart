@@ -35,12 +35,10 @@ class _HomeScreenState extends State<HomeScreen> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final stateData = context.read<CurrentWeatherBloc>().state;
+    // final stateData = context.read<CurrentWeatherBloc>().state;
     switch (state) {
       case AppLifecycleState.resumed:
-        if (stateData is! CurrentWeatherError) {
-          context.read<CurrentWeatherBloc>().add(FetchCurrentWeather());
-        }
+        context.read<CurrentWeatherBloc>().add(FetchCurrentWeather());
 
       default:
         // Do something when the app is not visible...
